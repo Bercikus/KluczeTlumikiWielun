@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="container">
     <header>
       <h1>Serwis dorabiania kluczy i wymiany tłumików</h1>
@@ -14,21 +14,21 @@
       </ul>
     </nav>
 
-    <div class="hero" style="background-image: url('https://media.istockphoto.com/id/1028243608/pl/zdj%C4%99cie/zbli%C5%BCenie-rury-wydechowej-samochodu.jpg?s=612x612&w=0&k=20&c=bfyRLvTLun2K_nuGVqy-FW01Mgow0j_Y3Ynza1_JBEE='); width: 50%; margin-left: auto;  margin-right: auto;  ">
-      <h2>Klucz i tłumik? Dwa punkty, jeden cel.</h2>
+    <div class="hero">
+      <h2>Najlepsze rozwiązania w jednym miejscu</h2>
       <p>Serwis tłumików, dorabianie kluczy i więcej!</p>
       <a href="#contact" class="cta">Skontaktuj się z nami</a>
     </div>
 
     <section id="services">
       <h2>Nasze Usługi</h2>
-      <div class="grid service-category-grid">
+      <div class="grid">
         <div
           v-for="(serviceCategory, index) in serviceCategories"
           :key="index"
-          class="card service-category-card"
-          :class="{ active: activeCategory === index }"
+          class="card"
           @click="toggleServiceDetails(index)"
+          :class="{ active: activeCategory === index }"
         >
           <img :src="serviceCategory.image" :alt="serviceCategory.alt" />
           <h3>{{ serviceCategory.title }}</h3>
@@ -36,13 +36,10 @@
         </div>
       </div>
 
-      <div
-        v-if="activeCategory !== null"
-        class="sub-services-container expanded"
-        :style="{ gridColumnStart: 1, gridColumnEnd: -1 }"
-      >
-        <!--  <h3>Usługi dla: {{ serviceCategories[activeCategory].title }}</h3>  -->
-
+      <div v-if="activeCategory !== null" class="service-details-container">
+        <div class="service-details-header">
+          <h3>{{ serviceCategories[activeCategory].title }} - Dostępne Usługi</h3>
+        </div>
         <div class="sub-services-grid">
           <div
             v-for="(subService, index) in serviceCategories[activeCategory].subServices"
@@ -96,10 +93,10 @@
       <div class="locations">
         <div class="location">
           <h4>Klucze</h4>
-          <p>Plac Legionów 12, 98-300 Wieluń</p>
+          <p>Adres Kluczy 123, Wieluń</p>
           <iframe
             class="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.7715111644616!2d18.56097987834928!3d51.22361093718659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a7ffcd4bd988f%3A0x8020e4a0cd84197b!2s%C5%9Alusarstwo%20Dorabianie%20Kluczy!5e0!3m2!1spl!2spl!4v1747282179908!5m2!1spl!2spl"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2568.884872729913!2d18.56687677663838!3d51.2205706716987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47192d28a9e4c6a7%3A0x9c5b5b3a7a8a8a8a!2sRynek%2C%20Wielu%C5%84!5e0!3m2!1spl!2spl!4v1678886400000!5m2!1spl!2spl"
             width="100%"
             height="300"
             style="border: 0"
@@ -110,10 +107,10 @@
         </div>
         <div class="location">
           <h4>Tłumiki</h4>
-          <p>Ogrodowa 15, 98-300 Wieluń</p>
+          <p>Adres Tłumiki 456, Wieluń</p>
           <iframe
             class="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4998.087744808456!2d18.572330622373993!3d51.21826745378878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471081e267549d65%3A0xb6db71c9faf2b0a4!2sT%C5%81UMIKI%20UK%C5%81ADY%20WYDECHOWE!5e0!3m2!1spl!2spl!4v1747282339853!5m2!1spl!2spl"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2568.884872729913!2d18.56687677663838!3d51.2205706716987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47192d28a9e4c6a7%3A0x9c5b5b3a7a8a8a8a!2sRynek%2C%20Wielu%C5%84!5e0!3m2!1spl!2spl!4v1678886400000!5m2!1spl!2spl"
             width="100%"
             height="300"
             style="border: 0"
@@ -142,7 +139,7 @@ import { ref } from 'vue';
 
 const serviceCategories = ref([
   {
-    image: 'https://img.freepik.com/free-photo/antique-keys_93675-129554.jpg?ga=GA1.1.307609347.1747278584&semt=ais_hybrid&w=740', ///src/assets/img/klucze.png
+    image: '/src/assets/img/klucze.png',
     alt: 'Dorabianie kluczy domowych',
     title: 'Dorabianie Kluczy',
     description: 'Precyzyjne klucze do drzwi i zamków specjalistycznych.',
@@ -160,7 +157,7 @@ const serviceCategories = ref([
     ],
   },
   {
-    image: 'https://as1.ftcdn.net/jpg/08/48/97/60/1000_F_848976014_A8Xz25av7M3a46Ui9PcDnDFcIEOCcL2r.jpg',     ///src/assets/img/tlumiki.png
+    image: '/src/assets/img/tlumiki.png',
     alt: 'Naprawa tłumików',
     title: 'Naprawa Tłumików',
     description: 'Profesjonalna regeneracja układów wydechowych.',
@@ -209,10 +206,10 @@ body {
 }
 
 header {
-  background: linear-gradient(135deg, #003366, #00468b);
+  background: linear-gradient(135deg, #003366, #004080);
   color: white;
   padding: 40px 20px;
-  text-align: center;  
+  text-align: center;
 }
 
 header h1 {
@@ -281,7 +278,7 @@ section {
   padding: 30px 30px;
   max-width: 1200px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 20px;
   border-radius: 10px;
   background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -326,12 +323,6 @@ section td {
   gap: 20px;
 }
 
-.service-category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
 .card {
   background: #f9f9f9;
   border: 1px solid #ddd;
@@ -362,69 +353,8 @@ section td {
 .card p {
   margin: 0 15px 15px;
   color: #555;
-  text-align: center;
 }
 
-.service-category-card.active {
-  border-bottom: none;
-  box-shadow: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.sub-services-container {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-  background-color: #f9f9f9;
-  border-radius: 0 0 10px 10px;
-  padding: 0 20px;
-  margin-top: -1px; /* Drobna korekta, aby połączyć wizualnie */
-  grid-column: 1 / -1; /* Rozciągnij na całą szerokość */
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-
-    border: 1px solid #ddd;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.expanded {
-  max-height: 1000px; /* Wysoka wartość, aby pomieścić zawartość */
-  padding: 20px;
-}
-
-.sub-services-container h3 {
-  font-size: 1.5em;
-  color: #004080;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.sub-services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 10px;
-}
-
-.sub-services-grid .sub-service-card {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  text-align: left;
-}
-
-.sub-services-grid .sub-service-card h3 {
-  font-size: 1.1em;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-/* Pozostałe style bez zmian */
 footer {
   background: #003366;
   color: white;
@@ -500,5 +430,53 @@ footer {
   .locations {
     grid-template-columns: 1fr; /* Jedna kolumna na mniejszych ekranach */
   }
+}
+
+/* Style dla kontenera wysuwanych podusług */
+.service-details-container {
+  margin-top: 20px;
+  width: 100%; /* Zajmuje całą dostępną szerokość */
+  display: flex;
+  flex-direction: column; /* Elementy jeden pod drugim */
+  align-items: center; /* Wyśrodkowanie w poziomie */
+}
+
+.service-details-header {
+  background-color: #004080;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 80%; /* Zawęża nagłówek */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.service-details-header h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.sub-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Układ kafelkowy */
+  gap: 20px;
+  width: 80%; /* Zawęża siatkę kafelków */
+}
+
+/* Styl dla pojedynczego kafelka podusługi */
+.sub-service-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+}
+
+.sub-service-card h3 {
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 10px;
 }
 </style>
